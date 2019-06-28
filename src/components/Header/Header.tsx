@@ -1,32 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SiteBrand from '../../assets/search-through-logo.png';
-import styled from 'styled-components';
+import HS from './HeaderStyle';
+import userActions from '../../redux/actions/userActions';
 
-const HeaderWrapper = styled.header`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	min-height: 60px;
-`;
+class Header extends Component<any> {
+	componentDidMount() {
+		this.props.checkUserValidation();
+	}
 
-const Logo = styled.img`
-	display: inline-block;
-	max-height: 30px;
-`;
+	render() {
+		const { isLoggedIn } = this.props;
 
-const Header: React.FC = (props: any) => {
-	const { isLoggedIn } = props;
-
-	return (
-		<HeaderWrapper>
-			<Logo src={SiteBrand} alt="Search Through Site Branding" />
-		</HeaderWrapper>
-	)
+		return (
+		<HS.HeaderWrapper>
+			<HS.Logo src={SiteBrand} alt="Search Through Site Branding" />
+			{isLoggedIn && (<HS.AuthUser>
+				<span>Welcome back USER</span>
+				<HS.ButtonLogout>LOGOUT</HS.ButtonLogout>
+			</HS.AuthUser>)}
+		</HS.HeaderWrapper>
+		)
+	}
 }
 
 const mapState = (state: any) => ({
-	isLoggedIn: state.isLoggedIn
+	isLoggedIn: state.usersState.isLoggedIn
 });
 
-export default connect(mapState)(Header);
+const mapDispatch = { ...userActions };
+
+export default connect(mapState, mapDispatch)(Header);
