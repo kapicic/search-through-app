@@ -6,7 +6,7 @@ const userReducer = (state = initialState, action: any) => {
 		case actionTypes.USER_FETCH_SUCCEEDED:
 			return { 
 				...state,
-				users: action.users
+				...action.payload
 			};
 		case actionTypes.USER_FETCH_FAILED:
 			return {
