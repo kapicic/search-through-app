@@ -1,15 +1,32 @@
 import React from 'react';
-import './Header.css';
-import Logo from '../../assets/search-through-logo.png';
+import { connect } from 'react-redux';
+import SiteBrand from '../../assets/search-through-logo.png';
+import styled from 'styled-components';
 
-const Header: React.FC = () => {
+const HeaderWrapper = styled.header`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 60px;
+`;
+
+const Logo = styled.img`
+	display: inline-block;
+	max-height: 30px;
+`;
+
+const Header: React.FC = (props: any) => {
+	const { isLoggedIn } = props;
+
 	return (
-		<header className="header">
-			<img className="logo" src={Logo} alt="Search Through Site Branding"/>
-			<div>Search Bar</div>
-			<div>Login/out navigation link</div>
-		</header>
+		<HeaderWrapper>
+			<Logo src={SiteBrand} alt="Search Through Site Branding" />
+		</HeaderWrapper>
 	)
 }
 
-export default Header;
+const mapState = (state: any) => ({
+	isLoggedIn: state.isLoggedIn
+});
+
+export default connect(mapState)(Header);
