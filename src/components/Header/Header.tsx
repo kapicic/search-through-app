@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import SiteBrand from '../../assets/search-through-logo.png';
 import HS from './HeaderStyle';
 import userActions from '../../redux/actions/userActions';
+import HeaderProps from '../../models/props/HeaderProps';
+import State from '../../models/state/State';
 
-class Header extends Component<any> {
+class Header extends Component<HeaderProps> {
 	componentDidMount() {
-		this.props.checkUserValidation();
+		this.props.checkUserValidation({ username: 'test', password: 'test' });
 	}
 
 	render() {
@@ -24,7 +26,7 @@ class Header extends Component<any> {
 	}
 }
 
-const mapState = (state: any) => ({
+const mapState = (state: State) => ({
 	isLoggedIn: state.usersState.isLoggedIn
 });
 
