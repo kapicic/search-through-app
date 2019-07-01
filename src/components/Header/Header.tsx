@@ -5,15 +5,16 @@ import HS from './HeaderStyle';
 import userActions from '../../redux/actions/userActions';
 import HeaderProps from '../../models/props/HeaderProps';
 import State from '../../models/state/State';
+import LoginForm from '../LoginForm/LoginForm';
 
 class Header extends Component<HeaderProps> {
-		
-	requestLoginForm() {
-		return '';
-	}
 
 	handleClick(isLoggedIn: boolean) {
-		isLoggedIn ? this.props.requestUserLogout() : this.props.requestUserValidation({ username: 'test', password: 'test' });
+		isLoggedIn ? this.props.requestUserLogout() : this.props.requestLoginForm();
+	}
+	
+	handleSubmit(userData: any) {
+		this.props.requestUserValidation({ ...userData });
 	}
 
 	render() {
@@ -22,6 +23,7 @@ class Header extends Component<HeaderProps> {
 		return (
 		<HS.HeaderWrapper>
 			<HS.Logo src={SiteBrand} alt="Search Through Site Branding" />
+			{ this.props.isLoginFormRequested && (<LoginForm onSubmit={this.handleSubmit.bind(this)}/>) }
 			<HS.AuthUser>
 					<HS.AuthButton isLoggedIn={isLoggedIn} handleClick={() => this.handleClick(isLoggedIn)}></HS.AuthButton>
 			</HS.AuthUser>
@@ -31,7 +33,8 @@ class Header extends Component<HeaderProps> {
 }
 
 const mapState = (state: State) => ({
-	isLoggedIn: state.usersState.isLoggedIn
+	isLoggedIn: state.usersState.isLoggedIn,
+	isLoginFormRequested: state.usersState.isLoginFormRequested,
 });
 
 const mapDispatch = { ...userActions };

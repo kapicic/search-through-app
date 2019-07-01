@@ -33,10 +33,14 @@ function* validateUser(action: Action) {
 		});
 		const data = yield response.json();
 		const { isValid } = JSON.parse(data);
-		yield put({ type: actionTypes.USER_VALIDATION_SUCCEEDED, payload: isValid })
+		yield isValid ? put({ type: actionTypes.USER_VALIDATION_SUCCEEDED, payload: isValid }) : put({ type: actionTypes.USER_VALIDATION_FAILED, payload: isValid });
 	} catch (exception) {
 		yield put({ type: actionTypes.USER_VALIDATION_FAILED, message: exception.message });
 	}
+}
+
+function* showUserForm() {
+	yield put({ type: actionTypes.USER_LOGIN_FORM_SHOW, payload: true });
 }
 
 function* watchUserFetch() {
@@ -55,12 +59,17 @@ function* watchUserLogout() {
 	yield takeLatest(actionTypes.USER_LOGOUT_REQUESTED, logoutUser);
 }
 
+function* watchUserFormRequested() {
+	yield takeLatest(actionTypes.USER_LOGIN_FORM_REQUESTED, showUserForm);
+}
+
 function* userSaga(action: Action) {
 	yield all([
 		watchUserFetch(),
 		watchUserSearch(action),
 		watchUserValidation(action),
-		watchUserLogout()
+		watchUserLogout(),
+		watchUserFormRequested()
 	]);
 }
 

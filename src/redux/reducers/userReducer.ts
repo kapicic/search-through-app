@@ -2,8 +2,6 @@ import initialState from '../store/initialState';
 import actionTypes from '../actions/actionTypes';
 
 const userReducer = (state = initialState, action: any) => {
-	console.log(action.type);
-
 	switch(action.type) {
 		case actionTypes.USER_FETCH_SUCCEEDED:
 			return { 
@@ -19,14 +17,25 @@ const userReducer = (state = initialState, action: any) => {
 		case actionTypes.USER_VALIDATION_SUCCEEDED:
 			return {
 				...state,
-				isLoggedIn: action.payload
+				isLoggedIn: action.payload,
+				isLoginFormRequested: !action.payload
 			};
 
 		case actionTypes.USER_VALIDATION_FAILED:
+			return {
+				...state,
+				loginFailed: action.payload
+			}
 		case actionTypes.USER_LOGOUT_SUCCEEDED:
 			return {
 				...state,
-				isLoggedIn: true
+				isLoggedIn: action.payload
+			};
+		
+		case actionTypes.USER_LOGIN_FORM_SHOW:
+			return {
+				...state,
+				isLoginFormRequested: action.payload
 			};
 
 		default:
