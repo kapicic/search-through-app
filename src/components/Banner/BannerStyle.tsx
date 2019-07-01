@@ -3,11 +3,22 @@ import SV from '../../style/variables'; // SV = style variables
 
 
 const BannerWrapper = styled.div`
-	min-height: 400px;
-	background-color: ${SV.colors.brown};
-	color: ${SV.colors.white}
+	min-height: 300px;
+	padding: 80px 0 40px 0;
+	background-color: ${SV.colors.brown}; /* Add a background image later and leave this line as a fallback */
+	color: ${SV.colors.white};
+	text-align: center;
+`;
+
+const BannerTitle = styled.h1`
+	margin-bottom: 30px;
+	font-size: 40px;
+	font-weight: ${SV.fontWeights.light};
+	letter-spacing: 1.3px;
+	text-transform: uppercase;
 `;
 
 export default {
-	BannerWrapper
+	BannerWrapper,
+	BannerTitle
 };

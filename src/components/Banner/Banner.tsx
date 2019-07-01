@@ -7,7 +7,7 @@ const Banner: FC = () => {
 	return (
 		<BS.BannerWrapper>
 			<BE.Container>
-				<h1>Aloha banner</h1>
+				<BS.BannerTitle>Search through app</BS.BannerTitle>
 				<p>This is a search form placeholder</p>
 			</BE.Container>
 		</BS.BannerWrapper>
