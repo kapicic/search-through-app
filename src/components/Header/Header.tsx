@@ -7,8 +7,13 @@ import HeaderProps from '../../models/props/HeaderProps';
 import State from '../../models/state/State';
 
 class Header extends Component<HeaderProps> {
-	componentDidMount() {
-		this.props.checkUserValidation({ username: 'test', password: 'test' });
+		
+	requestLoginForm() {
+		return '';
+	}
+
+	handleClick(isLoggedIn: boolean) {
+		isLoggedIn ? this.props.requestUserLogout() : this.props.requestUserValidation({ username: 'test', password: 'test' });
 	}
 
 	render() {
@@ -17,10 +22,9 @@ class Header extends Component<HeaderProps> {
 		return (
 		<HS.HeaderWrapper>
 			<HS.Logo src={SiteBrand} alt="Search Through Site Branding" />
-			{isLoggedIn && (<HS.AuthUser>
-				<span>Welcome back USER</span>
-				<HS.ButtonLogout>LOGOUT</HS.ButtonLogout>
-			</HS.AuthUser>)}
+			<HS.AuthUser>
+					<HS.AuthButton isLoggedIn={isLoggedIn} handleClick={() => this.handleClick(isLoggedIn)}></HS.AuthButton>
+			</HS.AuthUser>
 		</HS.HeaderWrapper>
 		)
 	}

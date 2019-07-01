@@ -21,6 +21,10 @@ function* searchUser(action: Action) {
 	}
 }
 
+function* logoutUser() {
+	yield put({ type: actionTypes.USER_LOGOUT_SUCCEEDED });
+}
+
 function* validateUser(action: Action) {
 	try {
 		const response = yield call(fetch, config.api.login, {
@@ -47,11 +51,16 @@ function* watchUserValidation(action: Action) {
 	yield takeLatest(actionTypes.USER_VALIDATION_REQUESTED, validateUser);
 }
 
+function* watchUserLogout() {
+	yield takeLatest(actionTypes.USER_LOGOUT_REQUESTED, logoutUser);
+}
+
 function* userSaga(action: Action) {
 	yield all([
 		watchUserFetch(),
 		watchUserSearch(action),
-		watchUserValidation(action)
+		watchUserValidation(action),
+		watchUserLogout()
 	]);
 }
 

@@ -2,13 +2,14 @@ import initialState from '../store/initialState';
 import actionTypes from '../actions/actionTypes';
 
 const userReducer = (state = initialState, action: any) => {
+	console.log(action.type);
+
 	switch(action.type) {
 		case actionTypes.USER_FETCH_SUCCEEDED:
 			return { 
 				...state,
 				...action.payload
 			};
-
 		case actionTypes.USER_FETCH_FAILED:
 			return {
 				...state,
@@ -22,9 +23,10 @@ const userReducer = (state = initialState, action: any) => {
 			};
 
 		case actionTypes.USER_VALIDATION_FAILED:
+		case actionTypes.USER_LOGOUT_SUCCEEDED:
 			return {
 				...state,
-				isLoggedIn: false
+				isLoggedIn: true
 			};
 
 		default:
