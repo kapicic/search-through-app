@@ -5,6 +5,8 @@ import store from './redux/store';
 import styled from 'styled-components';
 import styleVariables from './style/variables';
 
+import Header from './components/Header/Header';
+
 const Container = styled.div`
 	max-width: 1140px;
 	width: 100%;
@@ -17,12 +19,11 @@ const AppWrapper = styled.div`
 `;
 
 const App: React.FC = () => {
-	
 	return (
 		<Provider store={store} >
 			<AppWrapper>
 				<Container>
-					<h1>Hello React!</h1>
+					<Header />
 				</Container>
 			</AppWrapper>
 		</Provider>
