@@ -1,11 +1,7 @@
 import actionTypes from "./actionTypes";
 
-const fetchUsers = () => {
-	return {type: actionTypes.USER_FETCH_REQUESTED};
-}
+const fetchUsers = () => ({ type: actionTypes.USER_FETCH_REQUESTED });
+const searchUsers = (searchParams: any) => ({ type: actionTypes.USER_SEARCH_REQUESTED, payload: searchParams });
+const checkUserValidation = (userData: any) => ({ type: actionTypes.USER_VALIDATION_REQUESTED, payload: { ...userData } });
 
-const searchUsers = (searchParams: any) => {
-	return {type: actionTypes.USER_SEARCH_REQUESTED, payload: searchParams};
-}
-
-export default { fetchUsers, searchUsers };
+export default { fetchUsers, searchUsers, checkUserValidation };
