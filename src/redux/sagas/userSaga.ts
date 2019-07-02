@@ -13,14 +13,6 @@ function* fetchUser() {
 	}
 }
 
-function* searchUser(action: Action) {
-	try {
-		yield put({type: actionTypes.USER_SEARCH_SUCCEEDED, payload: 'PAYLOAD'});
-	} catch (exception) {
-		yield put({ type: actionTypes.USER_SEARCH_FAILED, payload: 'PAYLOAD' });
-	}
-}
-
 function* validateUser(action: Action) {
 	try {
 		const response = yield call(fetch, config.api.login, {
@@ -39,10 +31,6 @@ function* watchUserFetch() {
 	yield takeLatest(actionTypes.USER_FETCH_REQUESTED, fetchUser);
 }
 
-function* watchUserSearch(action: Action) {
-	yield takeLatest(actionTypes.USER_SEARCH_REQUESTED, searchUser);
-}
-
 function* watchUserValidation(action: Action) {
 	yield takeLatest(actionTypes.USER_VALIDATION_REQUESTED, validateUser);
 }
@@ -50,7 +38,6 @@ function* watchUserValidation(action: Action) {
 function* userSaga(action: Action) {
 	yield all([
 		watchUserFetch(),
-		watchUserSearch(action),
 		watchUserValidation(action)
 	]);
 }
