@@ -15,16 +15,7 @@ function* searchUsers(action: Action) {
 	}
 }
 
-function* updateSearchTerm(action: Action) {
-	try {
-		yield put({ type: actionTypes.UPDATE_SEARCH_TERM_SUCCEEDED, payload: action.payload });
-	} catch (exception) {
-		yield put({ type: actionTypes.UPDATE_SEARCH_TERM_FAILED, payload: action.payload });
-	}
-}
-
 const searchSaga = [
-	takeLatest(actionTypes.UPDATE_SEARCH_TERM_REQUESTED, updateSearchTerm),
 	takeLatest(actionTypes.USER_SEARCH_REQUESTED, searchUsers)
 ]
 

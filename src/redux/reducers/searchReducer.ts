@@ -16,18 +16,6 @@ const userReducer = (state = initialState, action: Action) => {
 				users: []
 			};
 
-		case actionTypes.UPDATE_SEARCH_TERM_SUCCEEDED:
-			return {
-				...state,
-				searchTerm: action.payload
-			};
-
-		case actionTypes.UPDATE_SEARCH_TERM_FAILED:
-			return {
-				...state,
-				searchTerm: ''
-			};
-
 		default:
 
 		return state;

@@ -1,5 +1,4 @@
 interface SearchProps {
-	requestUpdateSearchTerm: Function,
 	requestSearchUsers: Function
 }
 

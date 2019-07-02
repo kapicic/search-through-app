@@ -4,7 +4,6 @@ interface State {
 	users: UserContent[],
 	isLoggedIn: boolean,
 	usersState?: any,
-	searchTerm?: string,
 	isLoginFormRequested?: boolean
 }
 

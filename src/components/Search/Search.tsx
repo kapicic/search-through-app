@@ -10,10 +10,9 @@ const Search: FC<SearchProps> = (props) => {
 	let searchDelay: number;
 
 	const handleSearch = (searchTermValue: string): void => {
-		setSearchTerm(searchTermValue.trim());
 		clearTimeout(searchDelay);
 		searchDelay = setTimeout(() => {
-			props.requestUpdateSearchTerm(searchTermValue);
+			setSearchTerm(searchTermValue.trim());
 		}, 500);
 	}
 
