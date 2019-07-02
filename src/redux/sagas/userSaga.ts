@@ -13,14 +13,6 @@ function* fetchUser() {
 	}
 }
 
-function* searchUser(action: Action) {
-	try {
-		yield put({type: actionTypes.USER_SEARCH_SUCCEEDED, payload: 'PAYLOAD'});
-	} catch (exception) {
-		yield put({ type: actionTypes.USER_SEARCH_FAILED, payload: 'PAYLOAD' });
-	}
-}
-
 function* logoutUser() {
 	yield put({ type: actionTypes.USER_LOGOUT_SUCCEEDED });
 }
@@ -43,13 +35,11 @@ function* showUserForm() {
 	yield put({ type: actionTypes.USER_LOGIN_FORM_SHOW, payload: true });
 }
 
-const userSaga = [
+export const userSaga = [
 	takeLatest(actionTypes.USER_LOGIN_FORM_REQUESTED, showUserForm),
 	takeLatest(actionTypes.USER_LOGOUT_REQUESTED, logoutUser),
 	takeLatest(actionTypes.USER_VALIDATION_REQUESTED, validateUser),
-	takeLatest(actionTypes.USER_SEARCH_REQUESTED, searchUser),
 	takeLatest(actionTypes.USER_FETCH_REQUESTED, fetchUser),
-
 ];
 
 export default userSaga;

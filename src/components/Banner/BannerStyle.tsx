@@ -4,7 +4,7 @@ import SV from '../../style/variables'; // SV = style variables
 
 const BannerWrapper = styled.div`
 	min-height: 300px;
-	padding: 80px 0 40px 0;
+	padding: 80px 0;
 	background-color: ${SV.colors.brown}; /* Add a background image later and leave this line as a fallback */
 	color: ${SV.colors.white};
 	text-align: center;

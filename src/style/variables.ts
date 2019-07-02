@@ -3,6 +3,7 @@ const colors = {
 	black: '#000',
 	brown: '#61472e',
 	brownLight: '#c19c56',
+	brownLightHover: '#9c7c41',
 	brownWhite: '#f4f0e4',
 	cyan: '#68dbe2',
 	cyanDark: '#3c90ac'

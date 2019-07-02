@@ -1,3 +1,10 @@
 import userSaga from './userSaga';
+import searchSaga from './searchSaga';
+import { all } from 'redux-saga/effects';
 
-export default { userSaga };
+export default function* rootSaga() {
+	yield all([
+		...userSaga,
+		...searchSaga
+	]);	
+};

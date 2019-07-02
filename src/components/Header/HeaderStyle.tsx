@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import styleVariables from '../../style/variables';
 import AuthButton from '../AuthButton/AuthButton';
 
-const HeaderWrapper = styled.header`
+const HeaderWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
