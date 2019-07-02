@@ -3,28 +3,24 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 
 import styled from 'styled-components';
-import styleVariables from './style/variables';
+import SV from './style/variables'; // SV = style variables
+import BE from './style/elements'; // BE = base elements
 
+import Banner from './components/Banner/Banner';
 import Header from './components/Header/Header';
 
-const Container = styled.div`
-	max-width: 1140px;
-	width: 100%;
-	margin: 0 auto;
-	padding: 0 30px;
-`;
-
 const AppWrapper = styled.div`
-	background-color: ${styleVariables.colors.brownWhite}
+	background-color: ${SV.colors.brownWhite}
 `;
 
 const App: React.FC = () => {
 	return (
 		<Provider store={store} >
 			<AppWrapper>
-				<Container>
+				<BE.Container>
 					<Header />
-				</Container>
+				</BE.Container>
+				<Banner />
 			</AppWrapper>
 		</Provider>
 	);
