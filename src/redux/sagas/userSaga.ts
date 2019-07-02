@@ -1,4 +1,4 @@
-import { call, put, takeLatest, all } from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
 import actionTypes from '../actions/actionTypes';
 import config from '../../config';
 import Action from '../../models/action/Action';
@@ -43,34 +43,13 @@ function* showUserForm() {
 	yield put({ type: actionTypes.USER_LOGIN_FORM_SHOW, payload: true });
 }
 
-function* watchUserFetch() {
-	yield takeLatest(actionTypes.USER_FETCH_REQUESTED, fetchUser);
-}
+const userSaga = [
+	takeLatest(actionTypes.USER_LOGIN_FORM_REQUESTED, showUserForm),
+	takeLatest(actionTypes.USER_LOGOUT_REQUESTED, logoutUser),
+	takeLatest(actionTypes.USER_VALIDATION_REQUESTED, validateUser),
+	takeLatest(actionTypes.USER_SEARCH_REQUESTED, searchUser),
+	takeLatest(actionTypes.USER_FETCH_REQUESTED, fetchUser),
 
-function* watchUserSearch(action: Action) {
-	yield takeLatest(actionTypes.USER_SEARCH_REQUESTED, searchUser);
-}
-
-function* watchUserValidation(action: Action) {
-	yield takeLatest(actionTypes.USER_VALIDATION_REQUESTED, validateUser);
-}
-
-function* watchUserLogout() {
-	yield takeLatest(actionTypes.USER_LOGOUT_REQUESTED, logoutUser);
-}
-
-function* watchUserFormRequested() {
-	yield takeLatest(actionTypes.USER_LOGIN_FORM_REQUESTED, showUserForm);
-}
-
-function* userSaga(action: Action) {
-	yield all([
-		watchUserFetch(),
-		watchUserSearch(action),
-		watchUserValidation(action),
-		watchUserLogout(),
-		watchUserFormRequested()
-	]);
-}
+];
 
 export default userSaga;
