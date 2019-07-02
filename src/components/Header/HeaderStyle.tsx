@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import styleVariables from '../../style/variables';
+import AuthButton from '../AuthButton/AuthButton';
 
-const HeaderWrapper = styled.header`
+const HeaderWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -18,20 +19,9 @@ const AuthUser = styled.div`
 	color: ${styleVariables.colors.brown};
 `;
 
-const ButtonLogout = styled.button`
-	margin-left: 15px;
-	padding: 5px 15px;
-	border: 0;
-	border-radius: 5px;
-	background-color: ${styleVariables.colors.brown};
-	font-weight: ${styleVariables.fontWeights.bold};
-	font-size: 10px;
-	color: ${styleVariables.colors.white};
-`;
-
 export default {
 	HeaderWrapper,
 	Logo,
 	AuthUser,
-	ButtonLogout
+	AuthButton
 }

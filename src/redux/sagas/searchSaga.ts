@@ -23,7 +23,9 @@ function* updateSearchTerm(action: Action) {
 	}
 }
 
-export const searchSaga = [
+const searchSaga = [
 	takeLatest(actionTypes.UPDATE_SEARCH_TERM_REQUESTED, updateSearchTerm),
 	takeLatest(actionTypes.USER_SEARCH_REQUESTED, searchUsers)
 ]
+
+export default searchSaga;

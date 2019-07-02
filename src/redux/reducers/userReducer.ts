@@ -8,7 +8,6 @@ const userReducer = (state = initialState, action: any) => {
 				...state,
 				...action.payload
 			};
-
 		case actionTypes.USER_FETCH_FAILED:
 			return {
 				...state,
@@ -18,13 +17,25 @@ const userReducer = (state = initialState, action: any) => {
 		case actionTypes.USER_VALIDATION_SUCCEEDED:
 			return {
 				...state,
-				isLoggedIn: action.payload
+				isLoggedIn: action.payload,
+				isLoginFormRequested: !action.payload
 			};
 
 		case actionTypes.USER_VALIDATION_FAILED:
 			return {
 				...state,
-				isLoggedIn: false
+				loginFailed: action.payload
+			}
+		case actionTypes.USER_LOGOUT_SUCCEEDED:
+			return {
+				...state,
+				isLoggedIn: action.payload
+			};
+		
+		case actionTypes.USER_LOGIN_FORM_SHOW:
+			return {
+				...state,
+				isLoginFormRequested: action.payload
 			};
 
 		default:
