@@ -1,4 +1,4 @@
-import { call, put, takeLatest, all } from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
 import actionTypes from '../actions/actionTypes';
 import config from '../../config';
 import Action from '../../models/action/Action';
@@ -21,6 +21,10 @@ function* searchUser(action: Action) {
 	}
 }
 
+function* logoutUser() {
+	yield put({ type: actionTypes.USER_LOGOUT_SUCCEEDED });
+}
+
 function* validateUser(action: Action) {
 	try {
 		const response = yield call(fetch, config.api.login, {
@@ -29,30 +33,23 @@ function* validateUser(action: Action) {
 		});
 		const data = yield response.json();
 		const { isValid } = JSON.parse(data);
-		yield put({ type: actionTypes.USER_VALIDATION_SUCCEEDED, payload: isValid })
+		yield isValid ? put({ type: actionTypes.USER_VALIDATION_SUCCEEDED, payload: isValid }) : put({ type: actionTypes.USER_VALIDATION_FAILED, payload: isValid });
 	} catch (exception) {
 		yield put({ type: actionTypes.USER_VALIDATION_FAILED, message: exception.message });
 	}
 }
 
-function* watchUserFetch() {
-	yield takeLatest(actionTypes.USER_FETCH_REQUESTED, fetchUser);
+function* showUserForm() {
+	yield put({ type: actionTypes.USER_LOGIN_FORM_SHOW, payload: true });
 }
 
-function* watchUserSearch(action: Action) {
-	yield takeLatest(actionTypes.USER_SEARCH_REQUESTED, searchUser);
-}
+const userSaga = [
+	takeLatest(actionTypes.USER_LOGIN_FORM_REQUESTED, showUserForm),
+	takeLatest(actionTypes.USER_LOGOUT_REQUESTED, logoutUser),
+	takeLatest(actionTypes.USER_VALIDATION_REQUESTED, validateUser),
+	takeLatest(actionTypes.USER_SEARCH_REQUESTED, searchUser),
+	takeLatest(actionTypes.USER_FETCH_REQUESTED, fetchUser),
 
-function* watchUserValidation(action: Action) {
-	yield takeLatest(actionTypes.USER_VALIDATION_REQUESTED, validateUser);
-}
-
-function* userSaga(action: Action) {
-	yield all([
-		watchUserFetch(),
-		watchUserSearch(action),
-		watchUserValidation(action)
-	]);
-}
+];
 
 export default userSaga;
