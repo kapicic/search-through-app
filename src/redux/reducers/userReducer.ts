@@ -37,6 +37,12 @@ const userReducer = (state = initialState, action: any) => {
 				...state,
 				isLoginFormRequested: action.payload
 			};
+		
+		case actionTypes.USER_FETCH_BY_ID_SUCCEEDED:
+			return {
+				...state,
+				activeUser: action.payload
+			}
 
 		default:
 
