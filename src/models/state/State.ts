@@ -4,7 +4,7 @@ interface State {
 	users: UserContent[],
 	isLoggedIn: boolean,
 	usersState?: any,
-	isLoginFormRequested?: boolean
+	isLoginFormRequested?: boolean,
 }
 
 export default State;
