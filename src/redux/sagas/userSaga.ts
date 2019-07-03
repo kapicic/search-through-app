@@ -5,7 +5,7 @@ import Action from '../../models/action/Action';
 
 function* fetchUser() {
 	try {
-		const response = yield call(fetch, config.api.users.fetch);
+		const response = yield call(fetch, config.api.users.fetch.all);
 		const users = yield response.json();
 		yield put({ type: actionTypes.USER_FETCH_SUCCEEDED, payload: users });
 	} catch (exception) {
@@ -35,11 +35,23 @@ function* showUserForm() {
 	yield put({ type: actionTypes.USER_LOGIN_FORM_SHOW, payload: true });
 }
 
-export const userSaga = [
+function* fetchUserById(action: Action) {
+	try {
+		const endPoint = new URL(config.api.users.fetch.byId + action.payload);
+		const data = yield call(fetch, endPoint.toString());
+		const json = yield data.json();
+		yield put({ type: actionTypes.USER_FETCH_BY_ID_SUCCEEDED, payload: json });
+	} catch (exception) {
+		yield put({ type: actionTypes.USER_FETCH_BY_ID_FAILED, message: exception.message });
+	}
+}
+
+const userSaga = [
 	takeLatest(actionTypes.USER_LOGIN_FORM_REQUESTED, showUserForm),
 	takeLatest(actionTypes.USER_LOGOUT_REQUESTED, logoutUser),
 	takeLatest(actionTypes.USER_VALIDATION_REQUESTED, validateUser),
 	takeLatest(actionTypes.USER_FETCH_REQUESTED, fetchUser),
+	takeLatest(actionTypes.USER_FETCH_BY_ID_REQUESTED, fetchUserById),
 ];
 
 export default userSaga;

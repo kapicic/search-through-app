@@ -1,17 +1,22 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Banner from './components/Banner/Banner';
 import Header from './components/Header/Header';
 import UsersList from './components/UsersList/UsersList';
+import User from './components/User/User';
 
 const App: React.FC = () => {
 	return (
 		<Provider store={store} >
-			<Header />
-			<Banner />
-			<UsersList />
+			<Router>
+				<Header />
+				<Banner />
+				<UsersList />
+				<Route path='/user/:id' component={User} />
+			</Router>
 		</Provider>
 	);
 }
