@@ -1,5 +1,7 @@
+import Action from '../action/Action';
+
 interface SearchProps {
-	requestSearchUsers: Function
+	requestSearchUsers(searchParams: string): Action
 }
 
 export default SearchProps;

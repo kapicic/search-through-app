@@ -7,7 +7,7 @@ const userReducer = (state = initialState, action: Action) => {
 		case actionTypes.USER_SEARCH_SUCCEEDED:
 			return {
 				...state,
-				...action.payload
+				users: [...action.payload]
 			};
 
 		case actionTypes.USER_SEARCH_FAILED:
