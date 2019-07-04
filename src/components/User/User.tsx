@@ -21,7 +21,6 @@ const User: FC<UserProps> = (props) => {
 
 	const userFound = activeUser && activeUser.length;
 	const user = userFound && activeUser[0];
-	console.log({activeUser, user, userFound});
 	return (
 		userFound ? (
 		<div>
@@ -32,6 +31,5 @@ const User: FC<UserProps> = (props) => {
 		) : (<p>User not found</p>)
 	);
 }
-
 
 export default connect(mapState, mapDispatch)(User);
