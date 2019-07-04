@@ -22,7 +22,7 @@ const User: FC<UserProps> = (props) => {
 	}, [requestUserById, match.params.id]);
 
 	const userFound = activeUser && activeUser.length;
-	const user = activeUser && activeUser.length && activeUser[0];
+	const user = userFound && activeUser[0];
 
 	return (
 		<BE.Container>
