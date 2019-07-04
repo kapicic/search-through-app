@@ -1,17 +1,16 @@
 import React, { FC } from 'react'
 import { connect } from 'react-redux';
 import State from '../../models/state/State';
+import UserContent from '../../models/user/UserContent';
+import UsersListsProps from '../../models/props/UsersListProps';
 
 import UE from './UsersListStyle'; // UE = user elements
 
-const UsersList: FC<any> = (props) => {
-	const isArrayPopulated = props.users && props.users.length;
-	const singleUser = props.users ? props.users : null;
-
+const UsersList: FC<UsersListsProps> = ({ users }) => {
 	return (
-		isArrayPopulated ? (
+		users && users.length ? (
 		<UE.UsersListWrapper>
-			{ singleUser.map((user: any) => <UE.UsersListItem key={user.nid}><UE.UsersListLink href={'/user/' + user.nid}>{user.title}</UE.UsersListLink></UE.UsersListItem>) }
+			{ users.map((user: UserContent) => <UE.UsersListItem key={user.nid}><UE.UsersListLink href={'/user/' + user.nid}>{user.title}</UE.UsersListLink></UE.UsersListItem>) }
 		</UE.UsersListWrapper>
 		) : (<UE.UserListNotFound>User not found</UE.UserListNotFound>)
 	)
