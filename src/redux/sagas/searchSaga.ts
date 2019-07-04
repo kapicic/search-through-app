@@ -9,6 +9,7 @@ function* searchUsers(action: Action) {
 		searchUrl.searchParams.append('title', action.payload);
 		const response = yield call(fetch, searchUrl.toString());
 		const filteredUsers = yield response.json();
+
 		yield put({ type: actionTypes.USER_SEARCH_SUCCEEDED, payload: filteredUsers });
 	} catch (error) {
 		yield put({ type: actionTypes.USER_SEARCH_FAILED, payload: action.payload });

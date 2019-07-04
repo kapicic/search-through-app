@@ -11,7 +11,7 @@ const UsersList: FC<any> = (props) => {
 	return (
 		isArrayPopulated ? (
 		<UE.UsersListWrapper>
-			{ singleUser.map((user: any) => <UE.UsersListItem key={user.nid[0].value}><UE.UsersListLink href={'/user/' + user.vid[0].value}>{user.title[0].value}</UE.UsersListLink></UE.UsersListItem>) }
+			{ singleUser.map((user: any) => <UE.UsersListItem key={user.nid}><UE.UsersListLink href={'/user/' + user.nid}>{user.title}</UE.UsersListLink></UE.UsersListItem>) }
 		</UE.UsersListWrapper>
 		) : (<UE.UserListNotFound>User not found</UE.UserListNotFound>)
 	)

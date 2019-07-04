@@ -1,3 +1,5 @@
+import Action from '../action/Action';
+
 interface UserProps {
 	match: {
 		params: {
@@ -5,7 +7,7 @@ interface UserProps {
 		}
 	},
 	activeUser: Array<any>,
-	requestUserById(id: number): void,
+	requestUserById(id: number): Action,
 }
 
 export default UserProps;

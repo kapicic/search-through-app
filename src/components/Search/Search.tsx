@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react'
+import React, { SyntheticEvent, useState, FC } from 'react'
 import { connect } from 'react-redux';
 import SearchProps from '../../models/props/SearchProps';
 import searchActions from '../../redux/actions/searchActions';
@@ -16,7 +16,7 @@ const Search: FC<SearchProps> = (props) => {
 		}, 500);
 	}
 
-	const handleSubmit = (event: any): void => {
+	const handleSubmit = (event: SyntheticEvent): void => {
 		event.preventDefault();
 		if (searchTerm === '') return;
 		props.requestSearchUsers(searchTerm);
