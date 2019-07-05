@@ -10,7 +10,7 @@ const UsersList: FC<UsersListsProps> = ({ users }) => {
 	return (
 		users && users.length ? (
 		<UE.UsersListWrapper>
-			{ users.map((user: UserContent) => <UE.UsersListItem key={user.nid}><UE.UsersListLink href={'/user/' + user.nid}>{user.title}</UE.UsersListLink></UE.UsersListItem>) }
+			{ users.map((user: UserContent) => <UE.UsersListItem key={user.nid}><UE.UsersListLink to={'/user/' + user.nid}>{user.title}</UE.UsersListLink></UE.UsersListItem>) }
 		</UE.UsersListWrapper>
 		) : (<UE.UserListNotFound>User not found</UE.UserListNotFound>)
 	)

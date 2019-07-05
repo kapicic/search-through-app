@@ -1,7 +1,7 @@
 import { SyntheticEvent } from "react";
 
 interface LoginFormProps {
-	onSubmit(e: SyntheticEvent): any
+	handleSubmit(e: SyntheticEvent): any
 }
 
 export default LoginFormProps;
