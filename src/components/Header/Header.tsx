@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import SiteBrand from '../../assets/search-through-logo.png';
 import HS from './HeaderStyle';
@@ -7,39 +7,30 @@ import SV from '../../style/variables'; // SV = style variables
 import userActions from '../../redux/actions/userActions';
 import HeaderProps from '../../models/props/HeaderProps';
 import State from '../../models/state/State';
-import LoginForm from '../LoginForm/LoginForm';
+import { NavLink } from 'react-router-dom';
+import config from '../../config';
 
-class Header extends Component<HeaderProps> {
-	handleClick(isLoggedIn: boolean) {
-		isLoggedIn ? this.props.requestUserLogout() : this.props.requestLoginForm();
-	}
+const Header: FC<HeaderProps> = (props) => {
+	const { isLoggedIn, requestUserLogout } = props;
 
-	handleSubmit(userData: any) {
-		this.props.requestUserValidation({ ...userData });
-	}
-
-	render() {
-		const { isLoggedIn } = this.props;
-
-		return (
-		<header style={{ backgroundColor: SV.colors.brownWhite }}>
-			<BE.Container>
-				<HS.HeaderWrapper>
+	return (
+	<header style={{ backgroundColor: SV.colors.brownWhite }}>
+		<BE.Container>
+			<HS.HeaderWrapper>
+				<NavLink to={config.paths.home}>
 					<HS.Logo src={SiteBrand} alt="Search Through Site Branding" />
-					{ this.props.isLoginFormRequested && (<LoginForm onSubmit={this.handleSubmit.bind(this)}/>) }
-					<HS.AuthUser>
-							<HS.AuthButton isLoggedIn={isLoggedIn} handleClick={() => this.handleClick(isLoggedIn)}></HS.AuthButton>
-					</HS.AuthUser>
-				</HS.HeaderWrapper>
-			</BE.Container>
-		</header>
-		)
-	}
+				</NavLink>
+				<HS.AuthUser>
+						<HS.AuthButton isLoggedIn={isLoggedIn} handleClick={requestUserLogout}></HS.AuthButton>
+				</HS.AuthUser>
+			</HS.HeaderWrapper>
+		</BE.Container>
+	</header>
+	);
 }
 
 const mapState = (state: State) => ({
-	isLoggedIn: state.usersState.isLoggedIn,
-	isLoginFormRequested: state.usersState.isLoginFormRequested,
+	isLoggedIn: state.usersState.isLoggedIn
 });
 
 const mapDispatch = { ...userActions };

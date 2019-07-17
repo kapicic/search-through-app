@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SV from '../../style/variables';
+import { NavLink } from "react-router-dom";
 
 const UsersListWrapper = styled.ul`
 	display: flex;
@@ -24,7 +25,7 @@ const UsersListItem = styled.li`
 	}
 `;
 
-const UsersListLink = styled.a`
+const UsersListLink = styled(NavLink)`
 	color: ${SV.colors.brown};
 	text-decoration: none;
 	transition: color 200ms linear;

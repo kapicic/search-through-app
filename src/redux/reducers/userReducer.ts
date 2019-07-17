@@ -8,6 +8,7 @@ const userReducer = (state = initialState, action: any) => {
 				...state,
 				...action.payload
 			};
+
 		case actionTypes.USER_FETCH_FAILED:
 			return {
 				...state,
@@ -17,8 +18,7 @@ const userReducer = (state = initialState, action: any) => {
 		case actionTypes.USER_VALIDATION_SUCCEEDED:
 			return {
 				...state,
-				isLoggedIn: action.payload,
-				isLoginFormRequested: !action.payload
+				isLoggedIn: action.payload
 			};
 
 		case actionTypes.USER_VALIDATION_FAILED:
@@ -26,18 +26,13 @@ const userReducer = (state = initialState, action: any) => {
 				...state,
 				loginFailed: action.payload
 			}
+
 		case actionTypes.USER_LOGOUT_SUCCEEDED:
 			return {
 				...state,
 				isLoggedIn: action.payload
 			};
-		
-		case actionTypes.USER_LOGIN_FORM_SHOW:
-			return {
-				...state,
-				isLoginFormRequested: action.payload
-			};
-		
+
 		case actionTypes.USER_FETCH_BY_ID_SUCCEEDED:
 			return {
 				...state,

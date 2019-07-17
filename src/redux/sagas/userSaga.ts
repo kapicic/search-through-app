@@ -15,6 +15,7 @@ function* fetchUser() {
 
 function* logoutUser() {
 	yield put({ type: actionTypes.USER_LOGOUT_SUCCEEDED });
+	yield config.history.push(config.paths.login);
 }
 
 function* validateUser(action: Action) {
@@ -25,14 +26,12 @@ function* validateUser(action: Action) {
 		});
 		const data = yield response.json();
 		const { isValid } = JSON.parse(data);
-		yield isValid ? put({ type: actionTypes.USER_VALIDATION_SUCCEEDED, payload: isValid }) : put({ type: actionTypes.USER_VALIDATION_FAILED, payload: isValid });
+		yield put({ type: actionTypes.USER_VALIDATION_SUCCEEDED, payload: isValid });
+		yield isValid && config.history.push(config.paths.home);
 	} catch (exception) {
 		yield put({ type: actionTypes.USER_VALIDATION_FAILED, message: exception.message });
+		yield config.history.push(config.paths.login);
 	}
-}
-
-function* showUserForm() {
-	yield put({ type: actionTypes.USER_LOGIN_FORM_SHOW, payload: true });
 }
 
 function* fetchUserById(action: Action) {
@@ -47,7 +46,6 @@ function* fetchUserById(action: Action) {
 }
 
 const userSaga = [
-	takeLatest(actionTypes.USER_LOGIN_FORM_REQUESTED, showUserForm),
 	takeLatest(actionTypes.USER_LOGOUT_REQUESTED, logoutUser),
 	takeLatest(actionTypes.USER_VALIDATION_REQUESTED, validateUser),
 	takeLatest(actionTypes.USER_FETCH_REQUESTED, fetchUser),

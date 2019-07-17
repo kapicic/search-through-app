@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-const LoginForm: FC<any> = (props: any) => {
-	const { handleSubmit } = props;
+const LoginForm: FC<any>  = ({ handleSubmit }) => {
 	return <form onSubmit={handleSubmit}>
 		<div>
 			<label htmlFor="username">Username</label>
